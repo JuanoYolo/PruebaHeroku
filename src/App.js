@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
-import Login from "./views/Login"
-import Sidebar from "./views/Sidebar"
-import ChatScreen from "./views/ChatScreen"
+import Login from "./resources/js/views/Login"
+import Sidebar from "./resources/js/views/Sidebar"
+import ChatScreen from "./resources/js/views/ChatScreen"
 
 //Importamos la aplicación/credenciales
 import firebaseApp from "./firebase/credenciales";
@@ -20,7 +20,7 @@ function App() {
 //Saber si se inicio o se finalizo la sesion
 if(usuarioFirebase){
     setUsuarioGeneral(usuarioFirebase);
-    console.log("Sesion abierto")
+    console.log("Sesion abierta")
 }else{
     setUsuarioGeneral(null);
 
@@ -32,7 +32,7 @@ if(usuarioFirebase){
         {usuarioGeneral ? (
             <>
             {" "}
-                <Sidebar/> <ChatScreen />{" "}
+                <Sidebar usuarioGeneral={usuarioGeneral}/> <ChatScreen />{" "}
             </>
         ) : (
             <Login />

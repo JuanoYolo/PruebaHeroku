@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react"
 import { Avatar } from "@material-ui/core";
 import { ExpandMore, Add, Mic, Settings, Headset } from "@material-ui/icons";
 
-function Sidebar() {
+function Sidebar({usuarioGeneral}) {
+    console.log(usuarioGeneral)
     return (
         <div className="sidebar">
             <div className="sidebar__top">
@@ -25,6 +26,15 @@ function Sidebar() {
 
                 </div>
 
+            </div>
+
+
+            <div className="sidebar__profile">
+                <Avatar src={usuarioGeneral.photoURL} />
+                <div className="sidebar__profileInfo">
+                <h3>{usuarioGeneral.displayName}</h3>
+                <p>{usuarioGeneral.uid}</p>
+                </div>
             </div>
         </div>
     );

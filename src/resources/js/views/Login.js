@@ -2,7 +2,7 @@ import React from 'react'
 import {Button} from "@material-ui/core"
 
 //Para poder usar las credenciales de Firebase importamos las credenciales
-import firebaseApp from '../firebase/credenciales';
+import firebaseApp from '../../../firebase/credenciales';
 //Para usar los servicios importamos lo siguiente
 
 //La funcion getAuth inicia el servicio, con las credenciales que traemos de firebase
