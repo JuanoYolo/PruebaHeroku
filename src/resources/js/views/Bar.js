@@ -3,36 +3,36 @@ import React, { useState, useEffect } from "react"
 import { Avatar } from "@material-ui/core";
 import { ExpandMore, Add, Mic, Settings, Headset } from "@material-ui/icons";
 
-import CanalEnSidebar from "../../../components/CanalEnSidebar";
+import Canalbar from "../../../components/Canalbar";
 
 import firebaseApp from "../../../firebase/credenciales";
 import { getFirestore, collection, doc, setDoc, getDocs} from "firebase/firestore"
 import { async } from "@firebase/util";
 const db = getFirestore(firebaseApp);
 
-function Sidebar({usuarioGeneral}) {
+function Bar({usuarioGeneral}) {
 
     const [ListaCanales, setListaCanales] = useState([]);
 
 async function getCanales(){
-    const canalesArr = [];
+    const listCanales = [];
     const collectionRef = collection (db, "canales");
     const canalesCifrados = await getDocs(collectionRef);
     canalesCifrados.forEach(canalCifrado=>{
-        canalesArr.push(canalCifrado.data());
+        listCanales.push(canalCifrado.data());
     });
-    setListaCanales(canalesArr);
+    setListaCanales(listCanales);
 }
 
-function agregarCanal(){
+function addCanal(){
 
-    const nombreCanal = prompt("Pon un Nombre al canal");
+    const canalName = prompt("Pon un Nombre al canal");
 
-    if(nombreCanal){
-        const docuRef = doc(db, `canales/${nombreCanal}`);
+    if(canalName){
+        const docuRef = doc(db, `canales/${canalName}`);
         setDoc(docuRef, {
             id: new Date().getTime(),
-            nombre: nombreCanal,
+            nombre: canalName,
         });
 
         getCanales();
@@ -45,23 +45,23 @@ useEffect( ()=> {
 }, []);
 
     return (
-        <div className="sidebar">
-            <div className="sidebar__top">
+        <div className="bar">
+            <div className="bar__top">
             </div>
-            <div className="sidebar__channels">
-                <div className="sidebar__channelsHeader">
-                    <div className="sidebar__header">
+            <div className="bar__channels">
+                <div className="bar__channelsHeader">
+                    <div className="bar__header">
                         <ExpandMore />
                         <h4>Canales de texto</h4>
                     </div>
 
-                    <Add className="sidebar__addChannel" onClick={agregarCanal}
+                    <Add className="bar__addChannel" onClick={addCanal}
                      />
                 </div>
 
-                <div className="sidebar__channelsList">
+                <div className="bar__channelsList">
                     { ListaCanales ? ListaCanales.map((canal)=>{
-                       return <CanalEnSidebar nombre={canal.nombre} id={canal.id}/>;
+                       return <Canalbar nombre={canal.nombre} id={canal.id}/>;
                     })
                 : null}
 
@@ -70,9 +70,9 @@ useEffect( ()=> {
             </div>
 
 
-            <div className="sidebar__profile">
+            <div className="bar__profile">
                 <Avatar src={usuarioGeneral.photoURL} />
-                <div className="sidebar__profileInfo">
+                <div className="bar__profileInfo">
                 <h3>{usuarioGeneral.displayName}</h3>
                 <p>{usuarioGeneral.uid.substring(0,4)}</p>
                 </div>
@@ -81,4 +81,4 @@ useEffect( ()=> {
     );
 }
 
-export default Sidebar;
+export default Bar;

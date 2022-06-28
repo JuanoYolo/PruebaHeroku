@@ -1,9 +1,9 @@
 import React from 'react'
 
-function ChatScreen() {
+function Chat() {
   return (
     <div>ChatScreen</div>
   )
 }
 
-export default ChatScreen
+export default Chat

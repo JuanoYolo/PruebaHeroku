@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
 import Login from "./resources/js/views/Login"
-import Sidebar from "./resources/js/views/Sidebar"
-import ChatScreen from "./resources/js/views/ChatScreen"
+import Bar from "./resources/js/views/Bar"
+import Chat from "./resources/js/views/Chat"
 
 //Importamos la aplicación/credenciales
 import firebaseApp from "./firebase/credenciales";
@@ -32,7 +32,7 @@ if(usuarioFirebase){
         {usuarioGeneral ? (
             <>
             {" "}
-                <Sidebar usuarioGeneral={usuarioGeneral}/> <ChatScreen />{" "}
+                <Bar usuarioGeneral={usuarioGeneral}/> <Chat />{" "}
             </>
         ) : (
             <Login />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CanalEnSidebar({nombre, id}) {
+function Canalbar({nombre, id}) {
   return (
     <div className="sidebarChannel">
         <h4>
@@ -11,4 +11,4 @@ function CanalEnSidebar({nombre, id}) {
   );
 }
 
-export default CanalEnSidebar;
+export default Canalbar;
