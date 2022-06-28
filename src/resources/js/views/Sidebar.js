@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react"
 import { Avatar } from "@material-ui/core";
 import { ExpandMore, Add, Mic, Settings, Headset } from "@material-ui/icons";
 
+import CanalEnSidebar from "../../../components/CanalEnSidebar";
+
 import firebaseApp from "../../../firebase/credenciales";
 import { getFirestore, collection, doc, setDoc, getDocs} from "firebase/firestore"
 import { async } from "@firebase/util";
@@ -32,6 +34,8 @@ function agregarCanal(){
             id: new Date().getTime(),
             nombre: nombreCanal,
         });
+
+        getCanales();
     }
 
 }
@@ -57,7 +61,7 @@ useEffect( ()=> {
 
                 <div className="sidebar__channelsList">
                     { ListaCanales ? ListaCanales.map((canal)=>{
-                       return <div> {canal.nombre} </div>;
+                       return <CanalEnSidebar nombre={canal.nombre} id={canal.id}/>;
                     })
                 : null}
 
