@@ -2,7 +2,7 @@ import React from 'react'
 
 function Chat() {
   return (
-    <div>ChatScreen</div>
+    <div>Chat</div>
   )
 }
 
