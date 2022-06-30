@@ -61,12 +61,13 @@ function Bar({ usuarioGeneral, setCanalActive }) {
 
                 <div className="bar__channelsList">
                     {ListaCanales ? ListaCanales.map((canal) => {
-                        return 
+                        return(
                         <div onClick={()=> setCanalActive(canal.nombre)}>
                             <Canalbar nombre={canal.nombre} id={canal.id}/>
-                        </div>;
+                        </div>
+                        );
                     })
-                        : null}
+                         : null}
 
                 </div>
 
