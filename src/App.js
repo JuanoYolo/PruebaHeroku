@@ -33,8 +33,8 @@ if(usuarioFirebase){
         {usuarioGeneral ? (
             <>
             {" "}
-                <Bar usuarioGeneral={usuarioGeneral} setCanalActive={
-                setCanalActive}/> <Chat ActiveCanal={ActiveCanal}/>{" "}
+                <Bar usuarioGeneral={usuarioGeneral} 
+                setCanalActive={setCanalActive}/> <Chat ActiveCanal={ActiveCanal} user={usuarioGeneral}/>{" "}
             </>
         ) : (
             <Login />
