@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react'
 import ChatHeader from '../../../components/ChatHeader';
 import firebaseApp from '../../../firebase/credenciales';
-import  {getFirestore,doc,setDoc} from 'firebase/firestore'
+import Message from '../../../components/Message';
+import  {getFirestore,doc,setDoc, collection, getDocs} from 'firebase/firestore'
 
 
 import {AddCircle, EmojiEmotions} from "@material-ui/icons"
@@ -13,6 +14,7 @@ const firestore = getFirestore(firebaseApp);
 function Chat({ActiveCanal, user}) {
 
   const [inputMensaje, setInputMensaje] = useState("");
+  const [arrayMensajes, setarrayMensajes] = useState([]);
 
   function sendMessages(e){
     const docuRef = doc(firestore, `canales/${ActiveCanal}/messages/${new Date.getTime()}`);
@@ -25,14 +27,35 @@ function Chat({ActiveCanal, user}) {
     });
 
     setInputMensaje("");
+    getArrayMensajes();
   }
+
+  async function getArrayMensajes(){
+    const arrayMensajeTraer = [];
+
+    const coleccionRef = collection(firestore, `canales/${ActiveCanal}/mensajes`);
+    const mensajesCifrados = await getDocs(coleccionRef);
+    mensajesCifrados.forEach(mensaje=> {
+      arrayMensajeTraer.push(mensaje.data());
+    })
+
+    setarrayMensajes([...arrayMensajeTraer]);
+  }
+
+  useEffect(()=>{
+    getArrayMensajes();
+  }, [ActiveCanal]);
 
   return (
     <div className="chat">
       <ChatHeader nombreCanal={ActiveCanal}/>
 
       <div className="chat mensajes"></div>
-        {/*Mapear mensajes*/}
+        { arrayMensajes ?
+        arrayMensajes.map((mensaje)=> {
+          return <Message firebaseMessage={mensaje}/>
+        })
+        : null}
 
       <div className="chat__input"></div>
       <AddCircle fontSize="large" />
