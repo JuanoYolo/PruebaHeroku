@@ -36,7 +36,7 @@ function Chat({ActiveCanal, user}) {
 
       <div className="chat__input"></div>
       <AddCircle fontSize="large" />
-      <form onSubmit={sendMessages(e)}>
+      <form onSubmit={sendMessages}>
         {/*El disabled se coloca para que cuando no halla un canal seleccionado, no se pueda escribir para mandar mensajes*/}
         <input type="text" disabled={ ActiveCanal ? false : true } 
         value={inputMensaje} onChange={(e)=>
