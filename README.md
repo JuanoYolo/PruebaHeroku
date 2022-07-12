@@ -36,6 +36,12 @@ su uso suele ser para la administración de proyectos entre varias personas
 
 ![](https://aem.dropbox.com/cms/content/dam/dropbox/www/en-us/business/app-integrations/slack/Slack_logo_new.png)
 
+### Primera versión
+
+![img](./img/primeraVersion.png)
+
 ### Historias de Usuario
 
 [Historias de Usuario](https://tree.taiga.io/project/juano_monroy-ecicommunitychat/backlog)
+
+
