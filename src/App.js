@@ -45,11 +45,6 @@ class WSBBChannel {
     onError(evt) {
         console.error("In onError", evt);
     }
-    send(x, y) {
-        let msg = '{ "x": ' + (x) + ', "y": ' + (y) + "}";
-        console.log("sending: ", msg);
-        this.wsocket.send(msg);
-    }
 }
 // WebSocket
 
@@ -61,7 +56,6 @@ function App() {
             (msg) => {
                 var obj = JSON.parse(msg);
                 console.log("On func call back ", msg);
-                this.drawPoint(obj.x, obj.y);
             });
 
     const [usuarioGeneral, setUsuarioGeneral] = useState(null);
