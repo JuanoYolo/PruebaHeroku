@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react"
 
 import { Avatar } from "@material-ui/core";
-import { ExpandMore, Add, Mic, Settings, Headset } from "@material-ui/icons";
+import { ExpandMore, Add,Settings} from "@material-ui/icons";
 
 import Canalbar from "../../../components/Canalbar";
 
 import firebaseApp from "../../../firebase/credenciales";
 import { getFirestore, collection, doc, setDoc, getDocs } from "firebase/firestore"
 import { async } from "@firebase/util";
+import { getAuth, gethAuth, signOut } from "firebase/auth";
+
 const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 function Bar({ usuarioGeneral, setCanalActive }) {
 
@@ -79,6 +82,9 @@ function Bar({ usuarioGeneral, setCanalActive }) {
                 <div className="bar__profileInfo">
                     <h3>{usuarioGeneral.displayName}</h3>
                     <p>{usuarioGeneral.uid.substring(0, 4)}</p>
+                </div>
+                <div className="bar__profileIcons">
+                <Settings onClick={ ()=> signOut(auth)}/>
                 </div>
             </div>
         </div>

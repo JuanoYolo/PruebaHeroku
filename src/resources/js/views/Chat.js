@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import ChatHeader from '../../../components/ChatHeader';
 import firebaseApp from '../../../firebase/credenciales';
 import Message from '../../../components/Message';
-import  {getFirestore,doc,setDoc, collection, getDocs} from 'firebase/firestore'
+import  {getFirestore,doc,setDoc, collection, getDocs} from "firebase/firestore";
 
 
 import {AddCircle, EmojiEmotions} from "@material-ui/icons"
@@ -17,10 +17,11 @@ function Chat({ActiveCanal, user}) {
   const [arrayMensajes, setarrayMensajes] = useState([]);
 
   function sendMessages(e){
-    const docuRef = doc(firestore, `canales/${ActiveCanal}/messages/${new Date.getTime()}`);
+    e.preventDefault();
+    const docuRef = doc(firestore, `canales/${ActiveCanal}/messages/${new Date().getTime()}`);
     setDoc(docuRef, {
       foto:user.photoURL,
-      useer:user.displayName,
+      useer: user.displayName,
       messsages:inputMensaje,
       id: new Date().getTime() ,
 
@@ -33,7 +34,7 @@ function Chat({ActiveCanal, user}) {
   async function getArrayMensajes(){
     const arrayMensajeTraer = [];
 
-    const coleccionRef = collection(firestore, `canales/${ActiveCanal}/mensajes`);
+    const coleccionRef = collection(firestore, `canales/${ActiveCanal}/messages`);
     const mensajesCifrados = await getDocs(coleccionRef);
     mensajesCifrados.forEach(mensaje=> {
       arrayMensajeTraer.push(mensaje.data());

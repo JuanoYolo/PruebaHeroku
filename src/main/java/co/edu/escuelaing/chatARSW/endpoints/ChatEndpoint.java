@@ -35,7 +35,6 @@ public class ChatEndpoint {
     }
     @OnMessage
     public void processPoint(String message, Session session) {
-        System.out.println("Point received:" + message + ". From session: " + session);
         this.send(message);
 
     }
