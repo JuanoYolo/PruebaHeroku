@@ -40,6 +40,10 @@ su uso suele ser para la administración de proyectos entre varias personas
 
 ![img](./img/primeraVersion.png)
 
+### Primer mensaje
+
+![img](./img/primerMensaje.png)
+
 ### Historias de Usuario
 
 [Historias de Usuario](https://tree.taiga.io/project/juano_monroy-ecicommunitychat/backlog)
