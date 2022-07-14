@@ -6,7 +6,8 @@ import  {getFirestore,doc,setDoc, collection, getDocs} from "firebase/firestore"
 
 
 import {AddCircle, EmojiEmotions} from "@material-ui/icons"
-
+import Socket from '../../../components/Socket';
+import socket from '../../../components/Socket';
 
 const firestore = getFirestore(firebaseApp);
 
@@ -18,6 +19,7 @@ function Chat({ActiveCanal, user}) {
 
   function sendMessages(e){
     e.preventDefault();
+    socket.emit('Mensaje', user, Message);
     const docuRef = doc(firestore, `canales/${ActiveCanal}/messages/${new Date().getTime()}`);
     setDoc(docuRef, {
       foto:user.photoURL,
@@ -44,8 +46,14 @@ function Chat({ActiveCanal, user}) {
   }
 
   useEffect(()=>{
-    getArrayMensajes();
+    socket.on('Mensajes', getArrayMensajes());
+
+    return () => {socket.off()}
   }, [ActiveCanal]);
+
+  useEffect(()=>{
+    socket.emit('Conectado', user);
+  }, [user]);
 
   return (
     <div className="chat">
