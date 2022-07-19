@@ -9,6 +9,8 @@ import firebaseApp from "../../../firebase/credenciales";
 import { getFirestore, collection, doc, setDoc, getDocs } from "firebase/firestore"
 import { async } from "@firebase/util";
 import { getAuth, gethAuth, signOut } from "firebase/auth";
+import Socket from '../../../components/Socket';
+import socket from '../../../components/Socket';
 
 const db = getFirestore(firebaseApp);
 const auth = getAuth(firebaseApp);
@@ -25,6 +27,7 @@ function Bar({ usuarioGeneral, setCanalActive }) {
             listCanales.push(canalCifrado.data());
         });
         setListaCanales(listCanales);
+        
     }
 
     function addCanal() {
@@ -39,6 +42,7 @@ function Bar({ usuarioGeneral, setCanalActive }) {
             });
 
             getCanales();
+            socket.emit('Canal', usuarioGeneral, canalName);
         }
 
     }
@@ -46,6 +50,7 @@ function Bar({ usuarioGeneral, setCanalActive }) {
     useEffect(() => {
         getCanales();
     }, []);
+
 
     return (
         <div className="bar">

@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import Login from "./resources/js/views/Login";
 import Bar from "./resources/js/views/Bar";
 import Chat from "./resources/js/views/Chat";
-import Socket from "./components/Socket"; 
 
 //Importamos la aplicación/credenciales
 import firebaseApp from "./firebase/credenciales";

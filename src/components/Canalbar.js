@@ -2,9 +2,9 @@ import React from 'react'
 
 function Canalbar({nombre, id}) {
   return (
-    <div className="sidebarChannel">
+    <div className="barChannel">
         <h4>
-            <span className="sidebarChannel__hash">#</span>
+            <span className="barChannel__hash">#</span>
             {nombre}
         </h4>
     </div>
