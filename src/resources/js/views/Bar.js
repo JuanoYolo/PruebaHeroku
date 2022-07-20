@@ -41,8 +41,8 @@ function Bar({ usuarioGeneral, setCanalActive }) {
                 nombre: canalName,
             });
 
-            getCanales();
-            socket.emit('Canal', usuarioGeneral, canalName);
+            getCanales().then(r => socket.emit('Canal', usuarioGeneral, canalName));
+
         }
 
     }

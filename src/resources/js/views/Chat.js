@@ -18,7 +18,7 @@ function Chat({ ActiveCanal, user }) {
   const [arrayMensajes, setarrayMensajes] = useState([]);
 
   useEffect(() => {
-    socket.on('Mensajes', (inputMensaje) => {
+    socket.on('mensajes', (inputMensaje) => {
       setarrayMensajes([...arrayMensajes, inputMensaje]);
     });
 
@@ -27,9 +27,14 @@ function Chat({ ActiveCanal, user }) {
     };
   }, [arrayMensajes]);
 
+  /*const divRef = useRef(null);
+  useEffect(() => {
+    divRef.current.scrollIntoView({ behavior: "smooth" });
+  });*/
 
   function sendMessages(e) {
     e.preventDefault();
+    socket.emit('Mensaje', inputMensaje);
     const docuRef = doc(firestore, `canales/${ActiveCanal}/messages/${new Date().getTime()}`);
     setDoc(docuRef, {
       foto: user.photoURL,
@@ -38,8 +43,7 @@ function Chat({ ActiveCanal, user }) {
       id: new Date().getTime(),
     });
     getArrayMensajes();
-    socket.emit('Mensaje', inputMensaje)
-    window.alert(inputMensaje);
+    //window.alert(inputMensaje);
     setInputMensaje("");
   }
 
@@ -60,32 +64,31 @@ function Chat({ ActiveCanal, user }) {
   useEffect(() => {
     socket.on('Mensajes', getArrayMensajes());
     return () => { socket.off() }
-  }, [ActiveCanal]);
+  }, [arrayMensajes]);
 
 
 
   useEffect(() => {
-    socket.emit('Conectado', user);
+    socket.emit('conectado', user);
   }, [user]);
 
   return (
     <div className="chat">
       <ChatHeader nombreCanal={ActiveCanal} />
 
-      <div className="chat mensajes"></div>
-      {arrayMensajes ?
-        arrayMensajes.map((mensaje) => {
-          return <Message firebaseMessage={mensaje} />
-        })
-        : null}
-
+      <div className="chat__mensajes">
+        {arrayMensajes ?
+            arrayMensajes.map((mensaje) => {
+              return <Message firebaseMessage={mensaje} />
+            })
+            : null}
+      </div>
       <div className="chat__input"></div>
       <AddCircle fontSize="large" />
       <form onSubmit={sendMessages}>
         {/*El disabled se coloca para que cuando no halla un canal seleccionado, no se pueda escribir para mandar mensajes*/}
         <input type="text" disabled={ActiveCanal ? false : true}
-          value={inputMensaje} onChange={(e) =>
-            setInputMensaje(e.target.value)} placeholder={`Enviar Mensaje al canal # ${ActiveCanal || ""}`} />
+          value={inputMensaje} onChange={(e) => setInputMensaje(e.target.value)} placeholder={`Enviar Mensaje al canal # ${ActiveCanal || ""}`} />
         {/*El disabled se coloca para que cuando no halla un canal seleccionado, no se pueda presionar el boton de enviar mensajes*/}
         <button disabled={ActiveCanal ? false : true} className="chat__inputButton" type="submit">
           Enviar
