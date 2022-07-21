@@ -79,6 +79,35 @@ Aqui podemos ver una interacción entre dos usuarios.
 
 ![Chat Mensajes](Manual/chat/MasEnvioMensajes.png)
 
+Para poder cerrar sesión, el usuario debe dar click en el engranaje que se 
+encuentra en la parte inferior izquierda
 
+![Chat Cerrar Sesion](Manual/chat/CerrarSesion.png)
 
+## Base de datos
 
+Como proveedor de base de datos usamos **Firebase**, la cual nos provee la autenticación con google y
+la base de datos.
+
+![Pantalla Principal FireBase](Manual/Firebase/Principal.png)
+
+Allí podremos escoger el metodo de autenticación para ingresar a la pagina, para este proyecto se escogió
+**Google**.
+
+![Autenticación](Manual/Firebase/Autenticacion.png)
+
+Dentro de **Firebase** para el proyecto, se selecciono la siguiente manera para guardar
+los canales y mensajes, existe la colección padre que se llama **Canales**, la cual alberga
+los canales creados dentro de este.
+
+![Coleccion Padre](Manual/Firebase/BasedeDatos.png)
+
+Dentro de cada canal se crea una colección llamada **messages**, donde dentro de esta
+alberga los mensajes escritos por los usuarios, con un id y el respectivo mensaje
+
+![Coleccion canal](Manual/Firebase/messages.png)
+
+Dentro del mensaje no solo se guarda el ID, tambien la foto, el mensaje y el nombre del
+usuario para enviar el mensaje al chat con todos estos componentes.
+
+![Coleccion mensajes](Manual/Firebase/ChatMensaje.png)
