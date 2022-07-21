@@ -1,34 +1,16 @@
 const express = require('express');
-const http = require('http');
+const favicon = require('express-favicon');
+const path = require('path');
+const port = process.env.PORT || 8080;
 const app = express();
-const servver = http.createServer(app);
-
-const socketio = require('socket.io');
-const io = socketio(servver);
-
-io.on('Conexion', socket =>{
-    let user;
-
-    socket.on("conectado", (nomb) => {
-        user = nomb;
-        //socket.broadcast.emit manda el mensaje a todos los clientes excepto al que ha enviado el mensaje
-        socket.broadcast.emit("mensajes", {
-            user: user,
-            inputMensaje: `${user} ha entrado en la sala del chat`,
-        });
-    });
-
-    socket.on('Mensaje', (user, inputMensaje) => {
-        io.emit("Mensajes", {user, inputMensaje});
-        console.log("mensaje en server.js");
-    });
-
-    socket.on("disconnect", () => {
-        io.emit("Mensajes", {
-            servidor: "Servidor",
-            mensaje: `${nombre} ha abandonado la sala`,
-        });
-    });
+app.use(favicon(__dirname + '/build/favicon.ico'));
+// the __dirname is the current directory from where the script is running
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/ping', function (req, res) {
+ return res.send('pong');
 });
-
-servver.listen(5000, () => console.log("Encendido"))
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+app.listen(port);
