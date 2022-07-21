@@ -31,4 +31,5 @@ io.on('Conexion', socket =>{
     });
 });
 
-servver.listen(5000, () => console.log("Encendido"))
+const port = process.env.PORT || 3000;
+servver.listen(PORT, () => console.log("Encendido"))
