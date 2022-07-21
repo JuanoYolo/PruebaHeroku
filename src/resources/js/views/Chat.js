@@ -35,6 +35,7 @@ function Chat({ ActiveCanal, user }) {
   function sendMessages(e) {
     e.preventDefault();
     socket.emit('Mensaje', inputMensaje);
+    //Hacemos uso de las comillas invertidas(Template Strings) para poder almacenar información dinamica
     const docuRef = doc(firestore, `canales/${ActiveCanal}/messages/${new Date().getTime()}`);
     setDoc(docuRef, {
       foto: user.photoURL,
@@ -50,6 +51,7 @@ function Chat({ ActiveCanal, user }) {
   async function getArrayMensajes() {
     const arrayMensajeTraer = [];
 
+    //Hacemos uso de las comillas invertidas(Template Strings) para poder almacenar información dinamica
     const coleccionRef = collection(firestore, `canales/${ActiveCanal}/messages`);
     const mensajesCifrados = await getDocs(coleccionRef);
     mensajesCifrados.forEach(mensaje => {

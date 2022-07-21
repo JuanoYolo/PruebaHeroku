@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 
 // Añade aquí tus credenciales
 const firebaseConfig = {
-  apiKey: "AIzaSyD4iCAbuDABM-oWpJe4-OtrmkTFfLV3Ec4",
-  authDomain: "slackarsw-ce9c3.firebaseapp.com",
-  projectId: "slackarsw-ce9c3",
-  storageBucket: "slackarsw-ce9c3.appspot.com",
-  messagingSenderId: "397950750502",
-  appId: "1:397950750502:web:f97fd440fb8bc6356e3be7"
+  apiKey: "AIzaSyC2LcahYSQnWJAYZIGpQt0JzzExlU4emdQ",
+  authDomain: "slackarsw-e408d.firebaseapp.com",
+  projectId: "slackarsw-e408d",
+  storageBucket: "slackarsw-e408d.appspot.com",
+  messagingSenderId: "670552705111",
+  appId: "1:670552705111:web:f472e56d2c515b3c99bb12"
 };
 
 // Inicializamos la aplicación y la guardamos en firebaseApp

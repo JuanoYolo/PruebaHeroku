@@ -12,10 +12,15 @@ import { getAuth, gethAuth, signOut } from "firebase/auth";
 import Socket from '../../../components/Socket';
 import socket from '../../../components/Socket';
 
+//Guardamos las credenciales de firebase en la constante db
 const db = getFirestore(firebaseApp);
 const auth = getAuth(firebaseApp);
 
+//Como desde App configuramos que el componente Bar pueda traer Usuario general, lo podemos usar dentro de nuestra function aqui
 function Bar({ usuarioGeneral, setCanalActive }) {
+
+    //De esta manera podremos ver en el navegador la informacion que proviene del usuario y la cual usamos para retornar su info en pantalla
+    //console.log(usuarioGeneral)
 
     const [ListaCanales, setListaCanales] = useState([]);
 
@@ -30,12 +35,19 @@ function Bar({ usuarioGeneral, setCanalActive }) {
         
     }
 
+    /*
+    * Función que crea una entrada en nuestra base de datos para agregar el canal
+    */
     function addCanal() {
-
+        //Le pedimos al usuario que le ponga un nombre al canal y lo cree
         const canalName = prompt("Pon un Nombre al canal");
 
         if (canalName) {
+            //Usamos doc para poder crear una referencia al documento que queremos entrar, en este caso a la coleccion canales
+            //para que se cree el canal dentro de esta
+            //Hacemos uso de las comillas invertidas(Template Strings) para poder almacenar información dinamica
             const docuRef = doc(db, `canales/${canalName}`);
+            //Usamos setDoc para añadir la informacion a la referencia que creamos anteriormente, alli guardamos el canal creado
             setDoc(docuRef, {
                 id: new Date().getTime(),
                 nombre: canalName,
@@ -51,7 +63,6 @@ function Bar({ usuarioGeneral, setCanalActive }) {
         getCanales();
     }, []);
 
-
     return (
         <div className="bar">
             <div className="bar__top">
@@ -63,10 +74,11 @@ function Bar({ usuarioGeneral, setCanalActive }) {
                         <h4>Canales de texto</h4>
                     </div>
 
-                    <Add className="bar__addChannel" onClick={addCanal}
-                    />
+                    {/*Boton para añadir canales, el cual redirige y ejecuta la Funcion JS addCanal*/}
+                    <Add className="bar__addChannel" onClick={addCanal}/>
                 </div>
 
+                {/*Funcion que mapea los canales, */}
                 <div className="bar__channelsList">
                     {ListaCanales ? ListaCanales.map((canal) => {
                         return(
@@ -81,11 +93,12 @@ function Bar({ usuarioGeneral, setCanalActive }) {
 
             </div>
 
-
+            {/*Div donde dentro de este se trae la info del usuario para mostrarlo en pantalla*/}
             <div className="bar__profile">
                 <Avatar src={usuarioGeneral.photoURL} />
                 <div className="bar__profileInfo">
                     <h3>{usuarioGeneral.displayName}</h3>
+                    {/*Hacemos uso del metodo substring para recortar el codigo del usuario e imprimir solo cuatro caracteres*/}
                     <p>{usuarioGeneral.uid.substring(0, 4)}</p>
                 </div>
                 <div className="bar__profileIcons">

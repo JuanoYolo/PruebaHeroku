@@ -5,8 +5,7 @@ import {Button} from "@material-ui/core"
 import firebaseApp from '../../../firebase/credenciales';
 //Para usar los servicios importamos lo siguiente
 
-//La funcion getAuth inicia el servicio, con las credenciales que traemos de firebase
-//como argumento
+//La funcion getAuth inicia el servicio, con las credenciales que traemos de firebase como argumento
 import {getAuth, GoogleAuthProvider, signInWithRedirect} from "firebase/auth";
 
 //Guardamos en una constante, con esto ya podremos acceder a todos los servicios
@@ -18,7 +17,7 @@ const gProvider = new GoogleAuthProvider();
 function Login() {
 
 function logInConGoogle(){
-    //Con esto ya podremos iniciar sesion con google
+    //Con esto ya podremos iniciar sesion con google con redirección
     signInWithRedirect(auth, gProvider);
 }
   return (
@@ -27,6 +26,7 @@ function logInConGoogle(){
     <div className="login__logo" >
         <img src="https://media.istockphoto.com/vectors/startup-banner-vector-id1081882844?s=612x612" alt=""></img>
     </div>
+        {/*Boton para poder Acceder con Google*/}
         <Button onClick={logInConGoogle}>Acceder con Google</Button>
     </div>
     );
