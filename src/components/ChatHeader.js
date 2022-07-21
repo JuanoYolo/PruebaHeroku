@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Notifications, Search, Send } from "@material-ui/icons"
-
 function ChatHeader({nombreCanal}) {
     return (
         <div className="chatHeaader">
@@ -13,16 +11,6 @@ function ChatHeader({nombreCanal}) {
                 </h3>
             </div>
 
-        <div className="chatHeaader__right">
-            <Notifications />
-
-            <div className="chatHeaader__search">
-                <input placeholder="Search" />
-                <Search />
-            </div>
-
-            <Send />
-            </div>
         </div>
     )
 }
